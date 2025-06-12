@@ -42,7 +42,7 @@ public class Member {
 	}
 	
 	public void getIn() { //입실메뉴
-		if(isDay == true) { //정액권
+		if(isDay == true) { //시간권
 			seatPrint(); //MyPOS에 있다는데 어케하지
 			System.out.print("앉을 좌석 번호를 입력해주세요: ");
 			seatNum = scn.nextInt();
