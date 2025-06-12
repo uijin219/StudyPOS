@@ -1,0 +1,32 @@
+package pos;
+import java.util.Scanner;
+
+public class Admin {
+	private int id;
+	private String pw;
+	Scanner scn = new Scanner(System.in);
+	
+	public void SetAdmin() {
+		System.out.print("새로운 id를 생성하세요 (숫자만 생성가능):");
+		id = scn.nextInt();
+		System.out.print("새로운 pw를 생성하세요 (숫자, 영문_대소문자 생성가능):");
+		pw = scn.next();
+		String star ="";
+		for (int i = 0; i<pw.length(); i++) {
+			star+='*';
+		}
+		System.out.println("새로운 관리자 id: " + id +"\t" + "pw: " + star);		
+	}
+	public boolean checkAdmin() {
+		int cid; String cpw;
+		System.out.println();
+		System.out.println("관리자 권한이 있어야 하는 메뉴입니다.");
+		System.out.print("id: ");
+		cid = scn.nextInt();
+		System.out.print("pw: ");
+		cpw = scn.next();
+
+		if(this.id == cid && this.pw.equals(cpw)) return true;
+		else return false;
+	}
+}
