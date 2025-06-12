@@ -13,7 +13,7 @@ public class Member {
 		id = scn.nextInt();
 		System.out.print("pw를 입력하세요.(숫자 네자리)");
 		pw = scn.nextInt();
-		System.out.print("정액권을 끊으시겠습니까? (y/n)");
+		System.out.print("시간권을 끊으시겠습니까? (y/n)");
 		String s = scn.next();
 		
 		if(s.equals('y') && s.equals('Y')) isDay = true;
