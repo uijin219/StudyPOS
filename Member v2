@@ -52,7 +52,7 @@ public class Member {
 			pos.seatPrint();
 			System.out.print("앉을 좌석 번호를 입력해주세요: ");
 			seatNum = pos.checkSeatNumber();
-			if(seat.canSeat()) { //Seat에 있다는데 어케하지
+			if(pos.SeatList[seatNum-1].canSeat()) { //Seat에 있다는데 어케하지
 				System.out.println("열공하세요!");
 			}
 			else {
