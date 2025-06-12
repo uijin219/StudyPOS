@@ -47,10 +47,8 @@ public class Manager {
 
 	public void SeatMan() { //좌석관리
 		//좌석번호 입력 시 해당 좌석의 (이용중)요소를 없앰
-		int seatNum = scn.nextInt(); //좌석 입력받기
-		
-				
-		
-		
+		System.out.print("퇴실처리 할 좌석의 번호를 입력하세요 : ");
+		int SeatNumber = pos.checkSeatNumber();
+		pos.SeatList[SeatNumber].using = false;
 	}
 }
