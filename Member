@@ -1,0 +1,120 @@
+import java.util.Scanner;
+
+public class Member {
+	private int id;
+	private int pw;
+	private boolean isDay;
+	int time;
+	int seatNum = 0;
+	Scanner scn = new Scanner(System.in);
+	
+	public void createMember() {
+		System.out.print("id(전화번호)를 입력하세요.");
+		id = scn.nextInt();
+		System.out.print("pw를 입력하세요.(숫자 네자리)");
+		pw = scn.nextInt();
+		System.out.print("정액권을 끊으시겠습니까? (y/n)");
+		String s = scn.next();
+		
+		if(s.equals('y') && s.equals('Y')) isDay = true;
+		else if(s.equals('n') && s.equals('N')) isDay = false;
+		else {
+			System.out.print("y 또는 n을 입력하세요.");
+			s = scn.next();
+		}
+	}
+	
+	public boolean checkMember() {
+		int cid; int cpw;
+		System.out.println("\n로그인하세요.");
+		System.out.print("id(전화번호):");
+		cid = scn.nextInt();
+		System.out.print("pw(숫자 네자리):");
+		cpw = scn.nextInt();
+		
+		if(this.id == cid && this.pw == cpw) return true;
+		else return false;
+	}
+	
+	public Member(int id, int pw, boolean isDay, int time, int seatNum) {
+		this.id = id; this.pw = pw; this.isDay = isDay;
+		this.time = time; this.seatNum = seatNum;
+	}
+	
+	public void getIn() { //입실메뉴
+		if(isDay == true) { //정액권
+			seatPrint(); //MyPOS에 있다는데 어케하지
+			System.out.print("앉을 좌석 번호를 입력해주세요: ");
+			seatNum = scn.nextInt();
+			if(seat.canSeat()) { //Seat에 있다는데 어케하지
+				System.out.println("열공하세요!");
+			}
+			else {
+				System.out.println("해당 좌석에 앉을 수 없습니다.");
+				System.out.print("좌석 번호를 다시 입력해주세요: ");
+				seatNum = scn.nextInt();
+			}
+		}
+		else { //일일권
+			seatPrint();
+			System.out.print("앉을 좌석 번호를 입력해주세요: ");
+			seatNum = scn.nextInt();
+			if(seat.canSeat()) { //Seat에 있다는데 어케하지
+				int t; //addTime이랑 겹침 어케 잘해봐
+				System.out.println("시간 당 1500원입니다.");
+				System.out.print("몇시간 이용하실건가요? ");
+				t = scn.nextInt();
+				System.out.print(t*1500+"원입니다.\n열공하세요!");
+			}
+			else {
+				System.out.println("해당 좌석에 앉을 수 없습니다.");
+				System.out.print("좌석 번호를 다시 입력해주세요: ");
+				seatNum = scn.nextInt();
+			}
+		}
+	}
+	public void addTime() {
+		if(member.isDay == true) {
+			int n;
+			System.out.println("50시간 --> 50,000원");
+			System.out.println("100시간 --> 80,000원");
+			System.out.println("150시간 --> 130,000원");
+			System.out.println("200시간 --> 170,000원");
+			System.out.print("몇시간 구매하실 건가요? ");
+			n = scn.nextInt();
+			while(true) {
+				switch(n) {
+				case 50: System.out.println("50,000원입니다. "); break;
+				case 100: System.out.println("80,000원입니다."); break;
+				case 150: System.out.println("130,000원입니다."); break;
+				case 200: System.out.println("170,000원입니다."); break;
+				default: System.out.println("잘못된 입력입니다. 위의 숫자 중 골라주세요.");
+				}
+				break;
+			}
+		}
+		else {
+			int t;
+			System.out.println("시간 당 1500원입니다.");
+			System.out.print("몇시간 이용하실건가요? ");
+			t = scn.nextInt();
+			System.out.print(t*1500+"원입니다.");
+		}
+	}
+	public void switchSeat() {
+		System.out.print("앉을 좌석 번호를 입력해주세요: ");
+		seatNum = scn.nextInt();
+		if(seat.canSeat()) { //Seat에 있다는데 어케하지
+			System.out.println("자리를 옮기셨습니다.\n열공하세요!");
+		}
+		else {
+			System.out.println("해당 좌석에 앉을 수 없습니다.");
+			System.out.print("좌석 번호를 다시 입력해주세요: ");
+			seatNum = scn.nextInt();
+		}
+	}
+	public void bye() {
+		seatNum = 0;
+		System.out.println("퇴실처리되었습니다.");
+	}
+}
