@@ -1,0 +1,21 @@
+
+public class Seat {
+	Boolean using;
+	int id;
+	int time;
+	
+	public Seat(Boolean using, int id, int time){ 
+		this.using = using;
+		this.id = id;
+		this.time = time;
+		if(using == false) {id=0; time=0;}		
+	}
+	
+	public Boolean canSeat() { //좌석번호 입력받아 using으로 판별
+		if(this.using == false)
+			return true;
+		else
+			return false;
+	}
+	
+}
