@@ -24,7 +24,10 @@ public class Member {
 		System.out.print("시간권을 끊으시겠습니까? (y/n)");
 		String s = scn.next();
 		
-		if(s.equals("y") || s.equals("Y")) isDay = true;
+		if(s.equals("y") || s.equals("Y")) {
+			isDay = true;
+			addTime();
+		}
 		else if(s.equals("n") || s.equals("N")) isDay = false;
 		else {
 			System.out.print("y 또는 n을 입력하세요.");
