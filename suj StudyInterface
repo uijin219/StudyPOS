@@ -1,0 +1,12 @@
+
+public interface StudyInterface {
+	 public abstract void MainMenu1(); //관리자 회원 종료
+	 public abstract void MainMenu2(); //회원가입 로그인
+	 public abstract void ManagerMenu(); //매출관리 회원관리 좌석관리
+	 public abstract void MemberMenu(int index); // 입실(좌석선택) 시간연장 좌석변경 퇴실 종료
+	 public abstract void Quit(); //종료함수
+	 public abstract void seatPrint(); //회원 - 좌석 입력 함수
+	 public abstract void MemMan();
+	 public abstract void SeatMan();
+	
+}
