@@ -15,7 +15,7 @@ public class Exception {
 		return answ;
 	}
 	public int checkSeatNumber() {//좌석 입력받고 1~15번 중의 번호를 입력했는지 식별
-		int seatNum = scn.nextInt();
+		int seatNum;
 		seatNum = checkInputValue();
 		while(seatNum > 15 || seatNum <1) {
 			seatNum = scn.nextInt(); //좌석 입력받기
