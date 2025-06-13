@@ -1,0 +1,16 @@
+
+public class Seat {
+	Boolean using;
+	
+	public Seat(Boolean using){ 
+		this.using = using;
+	}
+	
+	public Boolean canSeat() { //using으로 판별
+		if(this.using == false)
+			return true;
+		else
+			return false;
+	}
+	
+}
