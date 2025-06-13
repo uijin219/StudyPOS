@@ -26,12 +26,14 @@ public class MyPOS implements StudyInterface {
 		n = scn.nextInt();
 		if(n==1) {
 			memberList.get(0).checkMember();
-		} else if(n==2) loginMenu();
+		} else if(n==2) MemberMenu();
 		else {
 			System.out.println("1 또는 2를 눌러주세요.");
 		}
 	}
 	
+	public void ManagerMenu() {}
+	public void MemberMenu() {}
 	public void seatPrint() {
 		for(int i=0; i<15; i++) {
 			String s;
@@ -41,11 +43,7 @@ public class MyPOS implements StudyInterface {
 		}
 		System.out.print("앉을 좌석 번호를 입력해주세요: ");
 	}
-	
-	public int calProfit() {
-		
-	}
-	
+	public void Quit() {}
 	public int checkInputValue() {
 		int answ = 0;
 		while(true) {
