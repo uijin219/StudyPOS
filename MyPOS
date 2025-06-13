@@ -1,0 +1,71 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class MyPOS implements StudyInterface {
+	int profit;
+	final int numberOfSeat = 15;
+	public ArrayList<Member> memberList = new ArrayList<Member>(1);
+	public Seat SeatList[] = new Seat[numberOfSeat];
+	Manager admin = new Manager();
+	Scanner scn = new Scanner(System.in);
+	
+	public MyPOS() {
+		memberList.add(new Member(123,"123qwe",true,60000,12));
+		//12번 좌석에 앉아있는 1분 남은 사람
+	}
+	
+	public void MainMenu1() {
+		
+	}
+	
+	public void MainMenu2() {
+		int n = 0;
+		System.out.println("1. 회원가입");
+		System.out.println("2. 로그인");
+		System.out.print("-->");
+		n = scn.nextInt();
+		if(n==1) {
+			memberList.get(0).checkMember();
+		} else if(n==2) loginMenu();
+		else {
+			System.out.println("1 또는 2를 눌러주세요.");
+		}
+	}
+	
+	public void seatPrint() {
+		for(int i=0; i<15; i++) {
+			String s;
+			if(SeatList[i].using == true) s="이용중";
+			else s="이용 가능";
+			System.out.print((i+1)+"번 좌석: "+s+	memberList.get(i).time+"시간 남음");
+		}
+		System.out.print("앉을 좌석 번호를 입력해주세요: ");
+	}
+	
+	public int calProfit() {
+		
+	}
+	
+	public int checkInputValue() {
+		int answ = 0;
+		while(true) {
+			try {
+				answ = Integer.parseInt(scn.next());
+				break;
+			} catch(NumberFormatException e) {
+				System.out.print("문자를 입력하셨습니다. 숫자를 입력하세요.");
+			}
+		}
+		return answ;
+	}
+	public int checkSeatNumber() {//좌석 입력받고 1~15번 중의 번호를 입력했는지 식별
+		int seatNum = scn.nextInt();
+		seatNum = checkInputValue();
+		while(seatNum > 15 || seatNum <1) {
+			seatNum = scn.nextInt(); //좌석 입력받기
+			System.out.print("1~15번의 좌석 번호를 입력하세요.");
+		}
+		return seatNum;
+	}
+	
+}
