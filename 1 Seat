@@ -1,0 +1,13 @@
+
+public class Seat {
+	
+	Boolean using = false;
+	
+	public Boolean canSeat() {
+		if(this.using == false)
+			return true; 
+		else
+			return false;
+	}
+	
+}
