@@ -1,0 +1,9 @@
+
+public interface StudyInterface {
+	public abstract void MainMenu1();
+	public abstract void MainMenu2();
+	public abstract void ManagerMenu();
+	public abstract void MemberMenu(int index);
+	public abstract void seatPrint(int index);
+	public abstract void Quit();
+}
