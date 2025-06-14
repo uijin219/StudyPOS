@@ -20,9 +20,6 @@ public class MyPOS implements StudyInterface{
 		System.out.println("-------------");
 		System.out.println("[소융스카에 오신 것을 환영합니다]");
 		System.out.println("-------------");
-		for(int i=0; i<numberOfSeat; i++) { //각 인덱스에 seat 객체 초기화
-		    SeatList[i] = new Seat(); 
-		}
 		manager.createManager();
 	}
 	
@@ -87,6 +84,7 @@ public class MyPOS implements StudyInterface{
 		System.out.println("2. 로그인");
 		System.out.print("--> ");
 		int n = e.checkInputValue();
+		while(true) {
 		switch(n) {
 		case 1: //1.회원가입 시 가입 후 메인메뉴2로
 			memberList.get(0).createMember();
@@ -98,7 +96,7 @@ public class MyPOS implements StudyInterface{
 			while(true) {
 			for (int i = 0; i < memberList.size(); i++) {
 		        if (memberList.get(i).id == cid) {
-		        	index = i; 
+		        	index = i;
 		        	if(memberList.get(index).checkMember())
 		        		MemberMenu(index);
 		        	else {
@@ -115,31 +113,47 @@ public class MyPOS implements StudyInterface{
 		        }
 		    break;
 		    }
-		default: 
+		default:
 			System.out.println("1 또는 2를 눌러주세요.");
 		}
+		MainMenu2();
+		}
 	}
+
 
 	public void MemberMenu(int index) { //로그인 되면 멤버메뉴:입실 시간연장 좌석변경 퇴실 종료
 		System.out.print("\n1. 입실\n2. 시간 연장\n3. 좌석 변경\n4. 퇴실\n5. 종료\n--> ");
 		int n = e.checkInputValue();
-		
-		if(n == 1) memberList.get(index).getIn(index); //입실 = 좌석선택
-		if(n==2) memberList.get(index).addTime(); //시간 연장
-		if(n==3) memberList.get(index).switchSeat(); //좌석 변경
-		if(n==4) memberList.get(index).bye(); //퇴실
-		if(n==5) Quit(); //종료
-		else {
-			System.out.println("1부터 5까지 입력해주세요.");
-		}
-	}
+		while(true) {
+		switch(n){
+			case 1:
+				memberList.get(index).getIn(index); //입실 = 좌석선택
+				break;
+			case 2:
+				memberList.get(index).addTime(); //시간 연장
+				break;
+			case 3:
+				memberList.get(index).switchSeat(); //좌석 변경
+				break;
+			case 4:
+				memberList.get(index).bye(); //퇴실
+				break;
+			case 5:
+				Quit(); //종료
+				break;
+			default:
+				System.out.println("1부터 5까지 입력해주세요.");
+				}				
+			MemberMenu(index);
+			}
+		}	
 	
 	
 	public void seatPrint(int index) { //좌석 출력
 		for(int i=0; i<numberOfSeat; i++) {
 			String s;
 			if(SeatList[i].using == true) {
-				s="이용중   ";
+				s="이용중";
 				System.out.println((i+1)+"번 좌석: "+s+" "+memberList.get(index).time+"시간 남음");
 			}
 			else{
