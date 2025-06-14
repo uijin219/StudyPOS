@@ -1,0 +1,168 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MyPOS implements StudyInterface{
+	public int profit; //매출
+	final int numberOfSeat = 15;
+	ArrayList<Member> memberList = new ArrayList<Member>(1); 
+	Seat[] SeatList = new Seat[numberOfSeat];
+	
+	Exception e = new Exception();
+	Manager manager = new Manager();
+	Scanner scn = new Scanner(System.in);
+	
+	public MyPOS() { //프로그램 시작 + 관리자와 12번 사람 등록
+		memberList.add(new Member(123,"123qwe",true,60000,12, this)); //12번 좌석에 앉아있는 1분 남은 사람
+		System.out.println("-------------");
+		System.out.println("[소융스카에 오신 것을 환영합니다]");
+		System.out.println("-------------");
+		for(int i=0; i<numberOfSeat; i++) { //각 인덱스에 seat 객체 초기화
+		    SeatList[i] = new Seat(); 
+		}
+		manager.createManager();
+	}
+	
+	public void MainMenu1() { //메인메뉴1 : 관리자, 회원, 종료 
+		while(true) {
+			System.out.print("\n1. 관리자\n2. 회원\n3. 종료\n--> ");
+			int get = e.checkInputValue();
+			switch(get) {
+			case 1 :
+				if (manager.checkManager()) 
+					ManagerMenu(); //매니저 확인 후 매니저 메뉴
+				else { //매니저 아닐 경우 메인메뉴1 로
+					System.out.println("올바르지 않은 id나 pw 입니다.");
+					break;}
+			case 2:
+				MainMenu2();
+				break;
+			case 3:
+				Quit();
+			default:
+				System.out.println("1~3을 눌러주세요.");
+						
+			}
+		}
+	}
+		
+	
+	
+	public void Quit() { //프로그램 종료
+		System.out.println("프로그램을 종료합니다.");
+		System.exit(0);
+	}
+	
+	public void ManagerMenu() { //매니저 메뉴	
+		while(true){
+			System.out.print("\n1. 매출 확인\n2. 회원 관리\n3. 좌석 관리\n4. 이전 메뉴\n--> ");
+			int get = e.checkInputValue();
+			switch(get) {
+			case 1:
+				System.out.println("전체 매출 : "+profit); 
+				break;
+			case 2:
+				MemMan(); 
+				break;
+			case 3:
+				SeatMan();  
+				break;
+			case 4:
+				MainMenu1();
+				break;
+			default:
+				System.out.println("1~4를 입력하세요.");			
+			}
+		}	
+	}
+	
+
+	int index;
+	
+	public void MainMenu2() { //메인메뉴2 회원가입, 로그인
+		System.out.println("\n1. 회원가입");
+		System.out.println("2. 로그인");
+		System.out.print("--> ");
+		int n = e.checkInputValue();
+		switch(n) {
+		case 1: //1.회원가입 시 가입 후 메인메뉴2로
+			memberList.get(0).createMember();
+			MainMenu2();
+			break;
+		case 2:
+			System.out.print("<<로그인>>\nid : ");
+			int cid = e.checkInputValue();
+			for (int i = 0; i < memberList.size(); i++) {
+		        if (memberList.get(i).id == cid) {
+		        	index = i; 
+		        	memberList.get(index).checkMember();
+		        	MemberMenu(index);} 
+		        else System.out.println("존재하지 않는 id입니다.\n회원가입 먼저 해주세요.");
+		        }
+		    break;
+		default: 
+			System.out.println("1 또는 2를 눌러주세요.");
+		}
+	}
+
+	public void MemberMenu(int index) { //로그인 되면 멤버메뉴:입실 시간연장 좌석변경 퇴실 종료
+		System.out.print("1. 입실\n2. 시간 연장\n3. 좌석 변경\n4. 퇴실\n5. 종료\n--> ");
+		int n = e.checkInputValue();
+		
+		if(n == 1) memberList.get(index).getIn(); //입실 = 좌석선택
+		if(n==2) memberList.get(index).addTime(); //시간 연장
+		if(n==3) memberList.get(index).switchSeat(); //좌석 변경
+		if(n==4) memberList.get(index).bye(); //퇴실
+		if(n==5) Quit(); //종료
+		else {
+			System.out.println("1부터 5까지 입력해주세요.");
+		}
+	}
+	
+	
+	public void seatPrint() { //좌석 출력
+		for(int i=0; i<15; i++) {
+			String s;
+			if(SeatList[i].using == true) {
+				s="이용중   ";
+				System.out.println((i+1)+"번 좌석: "+s+	memberList.get(i).time+"시간 남음");
+			}
+			else{
+				s="이용 가능";
+				System.out.println((i+1)+"번 좌석: "+s);
+			}
+		}
+		System.out.print("앉을 좌석 번호를 입력해주세요: ");
+	}
+	
+	public void MemMan() { //회원관리
+		//회원의 아이디를 입력하면 회원 리스트에서 삭제
+		System.out.print("\n삭제할 회원의 id를 입력해주세요.\n--> ");
+		Boolean found = false;
+		int num = e.checkInputValue();
+		for(int i =0; i<memberList.size();i++) {
+			if(memberList.get(i).id == num) {
+				memberList.remove(i);
+				found = true;
+				System.out.println("id "+num+ "이/가 삭제되었습니다.");
+				break;
+			}
+		}
+		if (!found)
+			System.out.print("존재하지 않는 id 입니다.\n");
+	}
+
+	public void SeatMan() { //좌석관리
+		//좌석번호 입력 시 해당 좌석의 (이용중)요소를 없앰
+		System.out.print("\n퇴실처리 할 좌석의 번호를 입력하세요 : ");
+		int SeatNumber = e.checkSeatNumber();
+		if(!SeatList[SeatNumber-1].using)
+				System.out.println("빈 좌석 입니다.");
+		else {	
+			SeatList[SeatNumber-1].using = false;
+			System.out.print(SeatNumber+"번 좌석 퇴실 처리 되었습니다.");
+		}
+	}
+	
+	
+	
+}
