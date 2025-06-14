@@ -1,0 +1,115 @@
+import java.util.Scanner;
+
+public class Member {
+	int id;
+	private String pw;
+	private boolean isDay;
+	int time;
+	int seatNum;
+	private MyPOS pos;
+	Scanner scn = new Scanner(System.in);
+	Exception e = new Exception();
+	
+	public Member(int id, String pw, boolean isDay, int time, int seatNum, MyPOS pos) { //멤버 생성자
+		this.id = id; this.pw = pw; this.isDay = isDay;
+		this.time = time; this.seatNum = seatNum; this.pos = pos;
+	}
+	
+	
+	public boolean checkMember() {//로그인
+		System.out.print("pw : ");
+		String cpw = scn.next();
+		
+		if(pw.equals(cpw)) return true;
+		else return false;
+	}
+	
+	public void getIn() { //입실메뉴
+		pos.seatPrint();
+		while(true) {
+			seatNum = e.checkSeatNumber();
+			if(pos.SeatList[seatNum-1].canSeat()) {
+				pos.SeatList[seatNum-1].using = true;
+				if(isDay)  //시간권
+					System.out.println(seatNum + "번 좌석 선택되었습니다. 열공하세요!");
+				else { //일일권
+					System.out.println("시간 당 1500원입니다.");
+					System.out.print("이용할 시간을 입력해주세요.(1시간 단위) ");
+					int t = e.checkInputValue();
+					System.out.println(t*1500+"원입니다. "+seatNum+"번 좌석 선택되었습니다. 열공하세요!");
+					pos.profit += t*1500;
+					}
+				break;}
+			else System.out.print("해당 좌석에 앉을 수 없습니다.\n좌석 번호를 다시 입력해주세요 : ");
+		}
+	}
+	
+	public void addTime(int index) { //시간 연장
+		if(isDay == true) { //시간권 시간연장
+			System.out.println("50시간 --> 50,000원(25000원 할인)");
+			System.out.println("100시간 --> 80,000원(70000원 할인");
+			System.out.println("150시간 --> 130,000원(95000원 할인)");
+			System.out.println("200시간 --> 170,000원(130000원 할인)");
+			System.out.print("몇 시간 구매하실 건가요? : ");
+			
+			while(true) {
+				int n = e.checkInputValue();
+				switch(n) {
+				case 50: 
+					System.out.println("50,000원입니다. "); 
+					pos.memberList.get(index).time+=50;
+					pos.profit += 50000;
+					return;
+				case 100: 
+					System.out.println("80,000원입니다."); 
+					pos.memberList.get(index).time+=100;
+					pos.profit += 80000;
+					return;
+				case 150: 
+					System.out.println("130,000원입니다."); 
+					pos.memberList.get(index).time+=150;
+					pos.profit += 130000;
+					return;
+				case 200: 
+					System.out.println("170,000원입니다."); 
+					pos.memberList.get(index).time+=200;
+					pos.profit += 170000;
+					return;
+				default: System.out.print("잘못된 입력입니다. 위의 숫자 중 골라주세요 : ");
+				}
+			}
+		}
+		else { //일일권 시간 연장
+			System.out.println("시간 당 1500원입니다.");
+			System.out.print("몇 시간 이용하실건가요? ");
+			int t = e.checkInputValue();
+			System.out.print(t*1500+"원입니다.");
+			pos.profit += t*1500;
+		}
+	}
+	
+	public void switchSeat() { //좌석 변경 .. 더 봐야할듯?
+		int preseat = seatNum; //원래 좌석 번호
+		System.out.print("앉을 좌석 번호를 입력해주세요 : ");
+		seatNum = e.checkSeatNumber();
+		if(pos.SeatList[seatNum-1].canSeat()) { 
+			pos.SeatList[preseat-1].using = false;
+			pos.SeatList[seatNum-1].using = true;
+			System.out.println("자리를 옮기셨습니다.\n열공하세요!");
+		}
+		else {
+			System.out.println("해당 좌석에 앉을 수 없습니다.");
+			System.out.print("좌석 번호를 다시 입력해주세요 : ");
+			seatNum = e.checkSeatNumber();
+		}
+	}
+	
+	public void bye() { //퇴실
+		pos.SeatList[seatNum-1].using = false;
+		seatNum = 0;
+		//일일권일때 시간은 없애고 시간권이면 시간 유지
+		if(isDay == false)
+			this.time = 0;	
+		System.out.println("퇴실처리되었습니다.");
+	}
+}
