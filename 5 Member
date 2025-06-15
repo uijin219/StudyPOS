@@ -25,6 +25,9 @@ public class Member {
 	}
 	
 	public void getIn() { //입실메뉴
+		if(this.seatNum != 0) {
+			System.out.println("이미 입실하셨습니다.");
+		}else {
 		pos.seatPrint();
 		while(true) {
 			int sn = e.checkSeatNumber();
@@ -44,6 +47,7 @@ public class Member {
 					}
 				break;}
 			else System.out.print("해당 좌석에 앉을 수 없습니다.\n좌석 번호를 다시 입력해주세요 : ");
+		}
 		}
 	}
 	
