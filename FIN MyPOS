@@ -1,0 +1,52 @@
+public void createMember() { //회원가입 후 시간권
+		int cid;
+		while(true) {
+			System.out.print("\n<<회원가입>>\n1. 이전메뉴\n2. 회원가입 => id를 입력하세요.(숫자만 가능) : ");
+			cid = e.checkInputValue();
+			boolean cantdo = false;
+			if(cid == 1) {
+				MainMenu2();
+				break;}
+			else {
+				for (int i = 0; i < memberList.size(); i++) {
+					if(memberList.get(i).id == cid) {
+						System.out.println("이미 존재하는 id입니다. 다시 입력해주세요.");
+						cantdo = true;
+						break;
+					}
+				}
+			}
+			if(!cantdo) break;
+		}
+		
+		int id = cid;
+		System.out.print("pw를 입력하세요. : ");
+		String pw = scn.next();
+		System.out.print("시간권을 끊으시겠습니까? (y/n) : ");
+		String s = scn.next();
+		boolean isDay = false;
+		int time = 0;
+		do {
+			if(s.equals("y") || s.equals("Y")) {
+				isDay = true;
+				time = chooseTime();
+				break;
+			}
+			if(s.equals("n") || s.equals("N")) {
+				isDay = false;
+				break;
+			}
+			else {
+				System.out.print("y/Y 또는 n/N을 입력하세요 : ");
+				s = scn.next();
+			}} while(true);
+		
+		int seatNum = 0;
+		memberList.add(new Member(id, pw, isDay, time, seatNum, this));
+		int A = pw.length();
+		String B = "*";
+		for(int i=0; i<A-1; i++)
+			B = B.concat("*");
+		System.out.println("\n회원가입 되었습니다.\n id : "+id+"   pw : "+B);
+		}
+	
