@@ -4,7 +4,7 @@ public class Member {
 	int id;
 	private String pw;
 	private boolean isDay;
-	Integer time;
+	int time;
 	int seatNum;
 	private MyPOS pos;
 	Scanner scn = new Scanner(System.in);
@@ -129,7 +129,7 @@ public class Member {
 		
 		//일일권일때 시간은 없애고 시간권이면 시간 유지
 		if(!isDay)
-			this.time = null;	
+			this.time = 0;	
 		System.out.println("퇴실처리되었습니다.");
 		seatNum = 0;
 	}
