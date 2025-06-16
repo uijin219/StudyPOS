@@ -90,18 +90,22 @@ public class MyPOS implements StudyInterface{
 			switch(n) {
 			case 50: 
 				System.out.println("50,000원입니다. "); 
+				System.out.println("잔여 시간은 "+n+"시간 입니다.");
 				profit += 50000;
 				return 50;
 			case 100: 
 				System.out.println("80,000원입니다."); 
+				System.out.println("잔여 시간은 "+n+"시간 입니다.");
 				profit += 80000;
 				return 100;
 			case 150: 
 				System.out.println("130,000원입니다."); 
+				System.out.println("잔여 시간은 "+n+"시간 입니다.");
 				profit += 130000;
 				return 150;
 			case 200: 
 				System.out.println("170,000원입니다."); 
+				System.out.println("잔여 시간은 "+n+"시간 입니다.");
 				profit += 170000;
 				return 200;
 			default: System.out.print("잘못된 입력입니다. 위의 숫자 중 골라주세요 : ");
