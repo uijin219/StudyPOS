@@ -62,34 +62,34 @@ public class Member {
 	
 	public void addTime() { //시간 연장
 		if(isDay == true) { //시간권 시간연장
-			System.out.println("\n50분 --> 50,000원(25000원 할인)");
-			System.out.println("100분 --> 80,000원(70000원 할인");
-			System.out.println("150분 --> 130,000원(95000원 할인)");
-			System.out.println("200분 --> 170,000원(130000원 할인)");
+			System.out.println("\n50분 --> 5,000원(2500원 할인)");
+			System.out.println("100분 --> 8,000원(7000원 할인");
+			System.out.println("150분 --> 13,000원(9500원 할인)");
+			System.out.println("200분 --> 17,000원(13000원 할인)");
 			System.out.print("\n구매할 시간을 입력해주세요 : ");
 			
 			while(true) {
 				int n = e.checkInputValue();
 				switch(n) {
 				case 50: 
-					pos.profit += 50000;
+					pos.profit += 5000;
 					this.time += 50;
-					System.out.println("\n50,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
+					System.out.println("\n5,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
 					return;
 				case 100: 
-					pos.profit += 80000;
+					pos.profit += 8000;
 					this.time += 100;
-					System.out.println("\n80,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
+					System.out.println("\n8,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
 					return;
 				case 150: 
-					pos.profit += 130000;
+					pos.profit += 13000;
 					this.time += 150;
-					System.out.println("\n130,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
+					System.out.println("\n13,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
 					return;
 				case 200: 
-					pos.profit += 170000;
+					pos.profit += 17000;
 					this.time += 200;
-					System.out.println("\n170,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
+					System.out.println("\n17,000원입니다. 잔여 시간은 "+time+"분 입니다."); 
 					return;
 				default: System.out.print("잘못된 입력입니다. 위의 숫자 중 골라주세요 : ");
 				}
