@@ -1,0 +1,29 @@
+	public void bye() { //퇴실, 일일권일때 시간은 없애고 시간권이면 시간 유지
+		if(this.seatNum == 0) System.out.println("지정된 좌석이 없습니다.");
+		else {
+			if(isDay == true) {
+				//머 타이머 멈추는 코드 하나 짜야겟고
+				pos.SeatList[seatNum-1].using = false;
+				System.out.println("퇴실 처리 되었습니다. 잔여 시간은 "+ time + "분 남았습니다.");//time 고치기
+				seatNum = 0;
+			}
+			else { //일일권
+				System.out.print("일일권 퇴실 처리 시 현재 남은 시간은 초기화됩니다. 퇴실 하시겠습니까? (y/n) --> ");
+				do {
+					String b = scn.next();
+					if(b.equals("y") || b.equals("Y")) {
+						pos.SeatList[seatNum-1].using = false;
+						this.time = null;
+						System.out.println("퇴실 처리 되었습니다.");
+						seatNum = 0;
+						break;
+					}
+					if(b.equals("n") || b.equals("N")) {
+						break;
+					}
+					else {
+						System.out.print("y/Y 또는 n/N을 입력하세요 : ");
+					}} while(true);
+			}
+		}
+	}
