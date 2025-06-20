@@ -84,34 +84,34 @@ public class MyPOS implements StudyInterface{
 	
 	
 	public int chooseTime() {
-		System.out.println("50분 --> 50,000원(25000원 할인)");
-		System.out.println("100분 --> 80,000원(70000원 할인");
-		System.out.println("150분 --> 130,000원(95000원 할인)");
-		System.out.println("200분 --> 170,000원(130000원 할인)");
+		System.out.println("50분 --> 5,000원(2500원 할인)");
+		System.out.println("100분 --> 8,000원(7000원 할인");
+		System.out.println("150분 --> 13,000원(9500원 할인)");
+		System.out.println("200분 --> 17,000원(13000원 할인)");
 		System.out.print("몇 분 구매하실 건가요? : ");
 		
 		while(true) {
 			int n = e.checkInputValue();
 			switch(n) {
 			case 50: 
-				System.out.println("50,000원입니다. "); 
+				System.out.println("5,000원입니다. "); 
 				System.out.println("잔여 시간은 "+n+"분 입니다.");
-				profit += 50000;
+				profit += 5000;
 				return 50;
 			case 100: 
-				System.out.println("80,000원입니다."); 
+				System.out.println("8,000원입니다."); 
 				System.out.println("잔여 시간은 "+n+"분 입니다.");
-				profit += 80000;
+				profit += 8000;
 				return 100;
 			case 150: 
-				System.out.println("130,000원입니다."); 
+				System.out.println("13,000원입니다."); 
 				System.out.println("잔여 시간은 "+n+"분 입니다.");
-				profit += 130000;
+				profit += 13000;
 				return 150;
 			case 200: 
-				System.out.println("170,000원입니다."); 
+				System.out.println("17,000원입니다."); 
 				System.out.println("잔여 시간은 "+n+"분 입니다.");
-				profit += 170000;
+				profit += 17000;
 				return 200;
 			default: System.out.print("잘못된 입력입니다. 위의 숫자 중 골라주세요 : ");
 			}
@@ -135,7 +135,7 @@ public class MyPOS implements StudyInterface{
 			case 3:
 				Quit();
 			default:
-				System.out.println("1~3을 눌러주세요.");	
+				System.out.println("1부터 3까지 입력해주세요.");	
 			}
 		}
 	}
@@ -165,7 +165,7 @@ public class MyPOS implements StudyInterface{
 				MainMenu1();
 				break;
 			default:
-				System.out.println("1~4를 입력하세요.");			
+				System.out.println("1부터 4까지 입력해주세요.");			
 			}
 		}	
 	}
@@ -282,7 +282,7 @@ public class MyPOS implements StudyInterface{
 				Member memb = memberList.get(i);
 				for(Seat s:SeatList) {
 					if(s.m == memb) {
-						s.using = false; //없으면 안되나 짜피 널되는데
+						s.using = false;
 						s.m = null;
 					}
 				}
